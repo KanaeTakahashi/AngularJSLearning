@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angularの練習</title>
+		<!-- <script src= "http://code.angularjs.org/angularj-1.0.1.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="myscript.js"></script>
+		<style>
+			/* 偶数 */
+			.even{
+				background: #ccc;
+			}
+			/* 奇数 */
+			.odd{
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>AngularJSの練習２</h1>
+		名前を入力してください＾＾
+		名前：<input type="text" ng-model="name">
+		<p>こんにちは！　{{name}}さん</p>
+		<hr>
+
+        <p>#06 ループで使える便利な命令</p>
+		<!-- このDIVでコントローラーを定義しているので、AngularJSに関わる部分はこの中に書く -->
+		<div ng-controller="MainController">
+			<ul>
+				<p>$index でループの回数を取得できるよ。（0からスタート）</p>
+				<li ng-repeat="user in users">
+					{{$index +1 }} : {{user.name}} {{user.score}}
+				</li>
+			</ul>
+			<ul>
+				<p>$first,$middle,$last でループの位置を取得できるよ。（true / false が返ってくる）
+					識別して表示を変えたい時などに利用できそう！
+				</p>
+				<li ng-repeat="user in users">
+					{{$index +1 }} : {{user.name}} {{user.score}} : {{$first}} {{$middle}} {{$last}}
+				</li>
+			</ul>
+			<hr>
+			<ul>
+				<p>ng-class-even, ng-class-odd</p>
+				<li ng-repeat="user in users" ng-class-even="'even'" ng-class-odd="'odd'">
+					{{$index +1 }} : {{user.name}} {{user.score}} : {{$first}} {{$middle}} {{$last}}
+				</li>
+			</ul>
+
+		</div>
+	</body>
+</html>

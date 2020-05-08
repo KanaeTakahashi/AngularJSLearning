@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angularの練習</title>
+		<!-- <script src= "http://code.angularjs.org/angularj-1.0.1.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="myscript.js"></script>
+	</head>
+	<body>
+		<h1>AngularJSの練習２</h1>
+		名前を入力してください＾＾
+		名前：<input type="text" ng-model="name">
+		<p>こんにちは！　{{name}}さん</p>
+		<p>計算もできるよ！{{5*3}}</p>
+		<hr>
+
+		<!-- このDIVでコントローラーを定義しているので、AngularJSに関わる部分はこの中に書く -->
+		<div ng-controller="MainController">
+
+		</div>
+	</body>
+</html>

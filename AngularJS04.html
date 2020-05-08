@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angularの練習</title>
+		<!-- <script src= "http://code.angularjs.org/angularj-1.0.1.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="myscript.js"></script>
+	</head>
+	<body>
+		<h1>AngularJSの練習４</h1>
+
+		<!-- このDIVでコントローラーを定義しているので、AngularJSに関わる部分はこの中に書く -->
+		<div ng-controller="MainController">
+            <p>#09 エラーメッセージを表示する</p>
+            <p>formタグのプロパティに novalidate を追加する（novalidateはHTML標準のバリデーションを無効化しAngularJSのバリデーションを使用するため）</p>
+            <form name="myForm" ng-submit="addUser()">
+                <p>inputタグにプロパティを追記する</p>
+                <p>Name: <input type="text" name="name"></p>
+
+                <p>#10 フォーム部品を設置しよう (1)</p>
+                <p>input type="number", input type="email", input type="url"</p>
+                <p>score:<input type="number" name="score"></p>
+                <p>Email: 
+                    <input type="email" name="email" ng-model="user.email">
+                    <span ng-show="myForm.email.$error.email">email形式じゃないよ</span>
+                </p>
+                <p>Web: 
+                    <input type="url" name="url" ng-model="user.url">
+                    <span ng-show="myForm.url.$error.url">url形式じゃないよ</span>
+                </p>
+
+                <p>#11 フォーム部品を設置しよう (2)</p>
+                <p>input type="checkbox", input type="radio", textarea</p>
+                <p>18歳以上：
+                    <input type="checkbox" ng-model="user.adult">
+                    この場合{ { user|json } } にはtrue/false が得られる
+                </p>
+                <p>18歳以上２：
+                    <input type="checkbox" ng-model="user.adult" 
+                        ng-true-value="'adult'" ng-false-value="'child'">
+                    この場合{ { user|json } } にはng-true-value/ng-false-value で指定した文字列が得られる。
+                    シングルクォーテーションで囲むこと！
+                </p>
+                <p>Phore：
+                    <input type="radio" ng-model="user.phone" value="iPhone"> iPhone
+                    <input type="radio" ng-model="user.phone" value="Android"> Android
+                    ラジオボタンの場合、ng-modelを同じ名前にしておくとグループ化してくれる！
+                </p>
+                <p>Memo：
+                    <textarea ng-model="user.memo" maxlength="140"></textarea>
+                    残り{{140-user.memo.length}}文字
+                </p>
+
+                <p>#12 フォーム部品を設置しよう (3)</p>
+                <p>ng-optionsでオプションタグを自動生成できる</p>
+                <p>「color in []」 で配列の要素をcolor変数に格納する。「'表示名：'+ color for」forの前までが要素の表示名</p>
+                <p>Color：
+                    <select ng-model="user.color" ng-options="'表示名：'+ color for color in ['red', 'blue', 'pink']"></select>
+                </p>
+                <p>Color２：
+                    <select ng-model="user.color2" ng-options="'選択色2：'+ color for color in ['red', 'blue', 'pink']"
+                        ng-init="user.color2='red'"></select>
+                </p>
+                <p><input type="submit" value="add2"></p>
+            </form>
+            <pre>{{user|json}}</pre>
+		</div>
+	</body>
+</html>

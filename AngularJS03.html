@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angularの練習</title>
+		<!-- <script src= "http://code.angularjs.org/angularj-1.0.1.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="myscript.js"></script>
+	</head>
+	<body>
+		<h1>AngularJSの練習３</h1>
+		<hr>
+        
+		<!-- このDIVでコントローラーを定義しているので、AngularJSに関わる部分はこの中に書く -->
+		<div ng-controller="MainController">
+            <p>#07 コントローラーのネストとイベント</p>
+            <ul>
+                <li ng-repeat="user in users" ng-controller="UserItemController">
+                    {{user.name}} {{user.score}} ： 
+                    <button ng-click="decrement()"> -1 </button>
+                    <button ng-click="increment()"> +1 </button>
+                </li>
+            </ul>
+            <hr>
+
+            <p> #08 フォームの基本を学ぼう</p>
+            <!-- 強力なバリデーションルール等が実装されている -->
+            <p>formタグのプロパティに ng-submit="メソッド()" を追加する</p>
+            <form name="myForm" ng-submit="addUser()">
+                <p>ng-model="user.name" と、プロパティを設定する</p>
+                <p>Name: <input type="text" name="name" ng-model="user.name"></p>
+                <p><input type="submit" value="add"></p>
+            </form>
+            <p>デバッグのテクニック！ &lt;pre&gt; { { user|json } } &lt;/pre&gt; を記述</p>
+            <pre>{{user|json}}</pre>
+            <hr>
+
+            <p>#09 エラーメッセージを表示する</p>
+            <p>formタグのプロパティに novalidate を追加する（novalidateはHTML標準のバリデーションを無効化しAngularJSのバリデーションを使用するため）</p>
+            <form name="myForm2" ng-submit="addUser()">
+                <p>inputタグにプロパティを追記する</p>
+                <p>required：必須、minlength：最小文字数、maxlength：最大文字数</p>
+                <p>ng-show="" の中にはtrue/false が入り、trueの場合表示します！</p>
+                <p>Name: <input type="text" name="name2"
+                            ng-model="user.name" required ng-minlength="5" ng-maxlength="8">
+                    <span ng-show="myForm2.name2.$error.required">必須！</span>
+                    <span ng-show="myForm2.name2.$error.minlength">少なすぎるよ！</span>
+                    <span ng-show="myForm2.name2.$error.maxlength">多すぎだよ～！</span>
+                </p>
+                <p><input type="submit" value="add2"></p>
+            </form>
+            <pre>{{user|json}}</pre>
+		</div>
+	</body>
+</html>

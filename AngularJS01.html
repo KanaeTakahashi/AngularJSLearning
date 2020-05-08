@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="myapp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angularの練習</title>
+		<!-- <script src= "http://code.angularjs.org/angularj-1.0.1.min.js"></script> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="myscript.js"></script>
+	</head>
+	<body>
+		<h1>AngularJSの練習</h1>
+		<p>#02 はじめてのAngularJS</p>
+		名前を入力してください＾＾
+		名前：<input type="text" ng-model="name">
+		<p>こんにちは！　{{name}}さん</p>
+		<p>計算もできるよ！{{5*3}}</p>
+		<hr>
+
+		<p>#03 コントローラーを使ってみよう</p>
+		<!-- このDIVでコントローラーを定義しているので、AngularJSに関わる部分はこの中に書く -->
+		<div ng-controller="MainController">
+			<p>今日は  {{today|date:'yyyy-MM-dd'}}  です</p>
+			<p>{{users.length}} users.</p>
+			<p>繰り返しは  ng-repeat  を使用するよ</p>
+			<ul>
+				<!-- 繰り返しは  ng-repeat  を使用する -->
+				<li ng-repeat="user in users">
+					{{user.name}} {{user.score}}
+				</li>
+			</ul>
+
+			<p>#04 フィルターを使ってみよう </p>
+			<p>プロパティにフィルターを書くことができるよ！</p>
+			<ul>
+				<li ng-repeat="user in users">
+					<!-- |フィルター名  を書くことでAngularJSのライブラリの享受を受けれる 
+						フィルターはつなげて書くこともできる！
+						uppercase  ：大文字に変換
+						lowercase  ：小文字に変換
+						number:2   ：小数点以下○位まで表示
+						currency   ：通貨、３桁区切りに変換
+						date:'yyyy-MM-dd' ：日付のフォーマットを指定して変換
+					-->
+					{{user.name|uppercase}} {{user.score|number:4}}
+					{{25*500|number}}
+					{{25*500|currency:"￥"}}
+				</li>
+			</ul>
+			<hr>
+			
+			<p>#05 ループで使えるフィルター</p>
+			<p>ng-repeat  にもフィルターが使用可能！</p>
+			<ul>
+				<!-- limitTo:4  ：表示個数を○個に制限する
+					orderBy:'プロパティ名'   ：プロパティの順でソートする
+						orderBy:'score'  昇順で表示
+						orderBy:'-score' 降順で表示
+				-->
+				<p>ng-repeat="user in users|limitTo:4"</p>
+				<li ng-repeat="user in users|limitTo:4">
+					{{user.name}} {{user.score}}
+				</li>
+			</ul>
+			<ul>
+				<p>ng-repeat="user in users|orderBy:'score'"</p>
+				<li ng-repeat="user in users|orderBy:'score'">
+					{{user.name}} {{user.score}}
+				</li>
+			</ul>
+			<p>フィルターは複数指定できるよ！</p>
+			<ul>
+				<p>ng-repeat="user in users|orderBy:'-score'|limitTo:3"</p>
+				<li ng-repeat="user in users|orderBy:'-score'|limitTo:3">
+					{{user.name}} {{user.score}}
+				</li>
+			</ul>
+			<hr>
+			
+			<p>なんとフィルターを文字列にできる！  →  検索できる！</p>
+			<!-- filter:文字列や変数model-->
+
+			<p>ng-model="query"  の場合、users配列の全てのプロパティのValueから検索する
+			</p>
+			<p><input type="text" ng-model="query"></p>
+			<ul>
+				<li ng-repeat="user in users|filter:query">
+					{{user.name}} {{user.score}}
+				</li>
+			</ul
+			>
+			<hr>
+			<p>user in users|filter:query2.name  の場合、users配列のnameプロパティのValueから検索する</p>
+			<p><input type="text" ng-model="query2.name"></p>
+			<ul>
+				<li ng-repeat="user in users|filter:query2">
+					{{user.name}} {{user.score}}
+				</li>
+			</ul>
+
+		</div>
+	</body>
+</html>
